@@ -1,5 +1,9 @@
-from src.section.agent import SectionAnalyzer
-from src.section.schemas import SectionInput, SectionOutput
+from src.utils.logger import get_logger
+from src.section.schemas import SectionInput, SectionAnalysisResult
+from src.section.analyzer import SectionAnalyzer
+
+
+logger = get_logger(__name__)
 
 
 class SectionService:
@@ -7,6 +11,7 @@ class SectionService:
         self.analyzer = SectionAnalyzer()
     
 
-    async def analyze_section(self, section: SectionInput) -> SectionOutput:
-        return await self.analyzer.analyze(section)
+    async def analyze_section(self, section_input: SectionInput) -> SectionAnalysisResult:
+        logger.info("Received section analysis request")
+        return await self.analyzer.analyze(section_input)
     
